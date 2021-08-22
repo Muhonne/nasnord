@@ -14,3 +14,36 @@ a {
 * {
   box-sizing: border-box;
 }
+
+main, .block{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.fileButton{
+  padding: 4px 8px;
+  border: 1px solid black;
+}
+.fileButton:hover{
+  opacity: 0.6;
+}
+.fileButton:active{
+  opacity: 0.3;
+}
+
+.infoBlock{
+  border: 1px solid #333;
+  padding: 8px;
+  margin: 8px;
+}
+
+.infoBlock > p {
+  margin: 0 0 4px 0;
+}
+
+.horizontalScroll {
+  max-width: 90%;
+  overflow-x: scroll;
+}
