@@ -15,25 +15,26 @@ a {
   box-sizing: border-box;
 }
 
-main, .block{
+main,
+.block {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.fileButton{
+.fileButton {
   padding: 4px 8px;
   border: 1px solid black;
 }
-.fileButton:hover{
+.fileButton:hover {
   opacity: 0.6;
 }
-.fileButton:active{
+.fileButton:active {
   opacity: 0.3;
 }
 
-.infoBlock{
+.infoBlock {
   border: 1px solid #333;
   padding: 8px;
   margin: 8px;
@@ -46,4 +47,10 @@ main, .block{
 .horizontalScroll {
   max-width: 90%;
   overflow-x: scroll;
+}
+
+.dataWarning {
+  color: red;
+  font-size: 18px;
+  font-weight: bold;
 }

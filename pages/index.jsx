@@ -22,6 +22,12 @@ export default function Home() {
     console.log(err);
   };
 
+  const handleRemove = () => {
+    setCount(0);
+    setRefined();
+  };
+
+  const renderAnalysis = lineCount > 5 && !!refined;
   return (
     <div>
       <Head>
@@ -32,12 +38,25 @@ export default function Home() {
       <main>
         <h1>Daily moves on Nasdaq Nord</h1>
         <ul>
-          <li>Go to <a href="http://www.nasdaqomxnordic.com/shares">http://www.nasdaqomxnordic.com/shares</a> and find your ticker.</li>
-          <li>Go to your tickers page, e.g. <a href="http://www.nasdaqomxnordic.com/shares/microsite?Instrument=HEX121161">TOKMAN</a> and scroll down to <b>Trades</b> and <b>Download CSV</b></li>
+          <li>
+            Go to{" "}
+            <a href="http://www.nasdaqomxnordic.com/shares">
+              http://www.nasdaqomxnordic.com/shares
+            </a>{" "}
+            and find your ticker.
+          </li>
+          <li>
+            Go to your tickers page, e.g.{" "}
+            <a href="http://www.nasdaqomxnordic.com/shares/microsite?Instrument=HEX121161">
+              TOKMAN
+            </a>{" "}
+            and scroll down to <b>Trades</b> and <b>Download CSV</b>
+          </li>
         </ul>
         <CSVReader
           onDrop={handleOnDrop}
           onError={handleOnError}
+          onRemoveFile={handleRemove}
           addRemoveButton
         >
           <span>Drop CSV file here or click to upload.</span>
@@ -45,9 +64,12 @@ export default function Home() {
       </main>
       <div className="block">
         <p>Lines in document: {lineCount}</p>
+        <p className="dataWarning">
+          {lineCount > 0 && lineCount < 5 && "Not enough data, try again!"}
+        </p>
       </div>
-      {!!refined && <Volumes refined={refined}/>}
-      {!!refined && <ByParticipant refined={refined} />}
+      {renderAnalysis && <Volumes refined={refined} />}
+      {renderAnalysis && <ByParticipant refined={refined} />}
     </div>
   );
 }
