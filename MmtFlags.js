@@ -4,7 +4,7 @@ export default function MmtFlags({ data }) {
   const flags = mmtCalc(data);
   return (
     <div className="mmtBlocksList">
-      <h3>MMT Flags</h3>
+      <h3>MMT Flags (algos galore)</h3>
       <div className="mmt">
         {Object.keys(flags).map((f) => {
           return (
