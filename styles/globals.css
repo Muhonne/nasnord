@@ -11,6 +11,36 @@ a {
   text-decoration: none;
 }
 
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.mmtBlocksList{
+  margin: 16px;
+}
+.mmt{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 8px;
+}
+.mmtBlock{
+  width: 15%;
+  margin: 8px;
+}
+.mmtDecoded, .mmtLine{
+  font-size: 10px;
+  width: 100%;
+  text-align: left;
+}
+.mmtLine {
+  padding-left: 8px;
+}
+.mmtCount{
+  font-weight: bold;
+}
+
 * {
   box-sizing: border-box;
 }

@@ -12,8 +12,7 @@ export default function ByParticipant({ refined }) {
         <b>Change in holdings:</b>
       </p>
       <p>
-        SHARES:{" "}
-        {refined[participant].buyVolume - refined[participant].sellVolume}
+        SHARES: {refined[participant].buyVolume - refined[participant].sellVolume}
       </p>
       <p>
         MONEY: {refined[participant].buyTotal - refined[participant].sellTotal}

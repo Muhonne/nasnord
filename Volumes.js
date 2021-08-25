@@ -11,17 +11,19 @@ import {
 } from "recharts";
 import { realNames } from "./utils";
 
-const BAR_ELEMENT_WIDTH = 150;
+const BAR_ELEMENT_WIDTH = 200;
 
 export default function Volumes({ refined }) {
   let data = Object.keys(refined).map((participant) => {
-    return {
-      name: realNames[participant],
-      bought: refined[participant].buyVolume,
-      sold: refined[participant].sellVolume,
-      cost: refined[participant].buyTotal,
-      gain: refined[participant].sellTotal,
-    };
+    if(participant !== 'miscRows') {
+      return {
+        name: realNames[participant] || participant,
+        bought: refined[participant].buyVolume,
+        sold: refined[participant].sellVolume,
+        cost: refined[participant].buyTotal,
+        gain: refined[participant].sellTotal,
+      };
+    }
   });
 
   const sortedBuys = data.sort((a, b) => b.bought - a.bought);

@@ -2,19 +2,22 @@ import Head from "next/head";
 import { useState } from "react";
 import { CSVReader } from "react-papaparse";
 import ByParticipant from "../ByParticipant";
+import MmtFlags from "../MmtFlags";
 
 import { refineByParticipant } from "../utils";
 import Volumes from "../Volumes";
 
 export default function Home() {
+  const [fileData, setFileData] = useState({});
   const [lineCount, setCount] = useState(0);
   const [refined, setRefined] = useState();
 
   const handleOnDrop = (data) => {
     setCount(data.length);
-    console.log("Month:", data[0]);
+    setFileData(data);
+    // console.log("Month:", data[0]);
+    // console.log("Example row:", data[2]);
     console.log("Headers:", data[1]);
-    console.log("Row:", data[2]);
     setRefined(refineByParticipant(data));
   };
 
@@ -28,6 +31,13 @@ export default function Home() {
   };
 
   const renderAnalysis = lineCount > 5 && !!refined;
+  if (renderAnalysis) {
+    if (refined.miscRows.length > 0) {
+      console.warn("Misc rows:", refined.miscRows);
+      console.warn("Participants:", Object.keys(refined));
+    }
+  }
+
   return (
     <div>
       <Head>
@@ -64,12 +74,16 @@ export default function Home() {
       </main>
       <div className="block">
         <p>Lines in document: {lineCount}</p>
+        {renderAnalysis && (
+          <p>Partial data rows: {refined.miscRows.length}, check console.</p>
+        )}
         <p className="dataWarning">
           {lineCount > 0 && lineCount < 5 && "Not enough data, try again!"}
         </p>
       </div>
+      {renderAnalysis && <MmtFlags data={fileData} />}
       {renderAnalysis && <Volumes refined={refined} />}
-      {renderAnalysis && <ByParticipant refined={refined} />}
+      {/*renderAnalysis && <ByParticipant refined={refined} />*/}
     </div>
   );
 }
